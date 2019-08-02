@@ -6,13 +6,12 @@
  * @param {*} defaultValue
  * @returns {*} Returns the resolved value.
  */
-function get(object, path, defaultValue) {
-    const result = (object !== null && typeof object === 'object') ? undefined : baseGet(obj, path)
-    return result === undefined ? defaultValue : result
-}
+function get(object, path, defaultValue = undefined) {
+    if (object === null || typeof object !== 'object') {
+        return defaultValue
+    }
 
-function baseGet(object, path) {
-    const pathArr = []
+    let pathArr = []
     if (Array.isArray(path)) {
         pathArr = path
     } else {
@@ -24,7 +23,5 @@ function baseGet(object, path) {
     while(index < length && object) {
       object = object[pathArr[index++]]
     }
-    return (index && index === length) ? object : undefined
+    return (index && object) ? object : defaultValue
 }
-
-export default get
