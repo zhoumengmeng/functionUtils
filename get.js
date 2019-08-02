@@ -7,12 +7,12 @@
  * @returns {*} Returns the resolved value.
  */
 function get(object, path, defaultValue) {
-    const result = (object !== null && typeof object === 'object') ? undefined : baseGet(obj, path)
+    const result = (object === null || typeof object !== 'object') ? undefined : baseGet(obj, path)
     return result === undefined ? defaultValue : result
 }
 
 function baseGet(object, path) {
-    const pathArr = []
+    let pathArr = []
     if (Array.isArray(path)) {
         pathArr = path
     } else {
@@ -26,5 +26,3 @@ function baseGet(object, path) {
     }
     return (index && index === length) ? object : undefined
 }
-
-export default get
