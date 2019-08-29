@@ -23,5 +23,5 @@ function get(object, path, defaultValue = undefined) {
     while(index < length && object) {
       object = object[pathArr[index++]]
     }
-    return (index && object) ? object : defaultValue
+    return (index && object !== undefined) ? object : defaultValue
 }
